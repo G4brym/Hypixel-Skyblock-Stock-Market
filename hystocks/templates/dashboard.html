@@ -1,0 +1,24 @@
+{% load render_bundle from utils %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <title>dashboard</title>
+    <meta name="url" content="{{ base_url }}">
+    <meta name="version" content="{{ VERSION.json|default_if_none:"{}" }}">
+    <link rel="icon" type="image/png" href="{% static "images/favicon.png" %}" sizes="32x32"/>
+</head>
+
+<body>
+<div id="app">
+    <nav-bar></nav-bar>
+    <div class="container">
+        <router-view></router-view>
+    </div>
+</div>
+
+{% render_bundle 'index' %}
+</body>
+</html>

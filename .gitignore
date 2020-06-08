@@ -1,0 +1,55 @@
+*.pyc
+*.egg-info
+docs/_build
+hystocks/settings/local.py
+hystocks/settings/local/*
+node_modules
+.env/
+.env
+var
+db.sqlite3
+
+# Media & statics
+build
+mediafiles
+staticfiles
+webpack-stats.json
+
+# GeoDatabases
+geodatabases
+*.mmdb
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.global.yml
+
+../.idea/
+xray
+geckodriver.log
+ua.txt
+.kubeconfig.yaml
+npm-debug.log
+.vscode/settings.json
+.version.txt
+
+.DS_Store
+node_modules
+/dist
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
