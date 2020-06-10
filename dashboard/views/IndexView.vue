@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Example View</h1>
+    <h1>WIP</h1>
   </div>
 </template>
 

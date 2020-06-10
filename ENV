@@ -1,0 +1,10 @@
+PORT=8001
+NGINX_STATIC_PATHS=/static:staticfiles
+DJANGO_SETTINGS_MODULE=cryptofinance.settings.production
+ALLOWED_HOSTS=dashboard.g4brym.ovh
+DATABASE_URL=postgres://dashboard:dashboard@192.168.0.12:5432/dashboard
+REDIS_URL=redis://192.168.0.12:6379/1
+BROKER_URL=redis://192.168.0.12:6379/2
+RESULT_BACKEND_URL=redis://192.168.0.12:6379/3
+CELERY_RUNNING=true
+C_FORCE_ROOT=true

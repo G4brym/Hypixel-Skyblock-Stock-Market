@@ -1,63 +1,28 @@
-stages:
-  - build
-  - deploy
-
-
-# -------------------------------------
-# Build jobs
-# -------------------------------------
-
-# .build_base:
-.build_template: &build_base
-  image: node:10.15.1-alpine
+build-and-deploy:
+  image: node:8.16.2
   stage: build
+  before_script:
+    # Setup SSH deploy keys
+    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+    - git config --global user.email "runner@gitlab.com"
+    - git config --global user.name "Gitlab Runner"
+    - git checkout -b ci_processing
   script:
-    - apk --update add git zip
-    - mkdir build
     - npm install
     - npm run build
     - printf "$CI_COMMIT_REF_NAME\n$CI_COMMIT_SHORT_SHA\n" > .version.txt
     - printf "$CI_PROJECT_URL/commit/$CI_COMMIT_SHA\n" >> .version.txt
-    - echo "Create build archive"
-    - ARCHIVE_PATH=build/$ARCHIVE
-    - git archive -o $ARCHIVE_PATH HEAD
-    - zip -rv $ARCHIVE_PATH .version.txt
-    - zip -rv $ARCHIVE_PATH webpack-stats.json
-    - zip -rv $ARCHIVE_PATH build/static
-  artifacts:
-    when: on_success
-    expire_in: 1 hour
-    paths:
-      - build/
-
-build:development:
-  <<: *build_base
-  environment:
-    name: development
+    - git add .version.txt -f
+    - git add build/static/dashboard/index.js -f
+    - git add webpack-stats.json -f
+    - git commit -m "Added dashboard statics"
+    - git remote add piku $PAAS_HOST
+    - ssh piku@$HOST stop dashboard
+    - git push piku ci_processing --force
+    - ssh piku@$HOST restart dashboard
   only:
-    refs:
-      - master
-      - /^feature\/.*$/
-
-# -------------------------------------
-# Deploy jobs
-# -------------------------------------
-
-.deploy_template: &deploy_base
-  image: python:3.6.8-alpine
-  stage: deploy
-  script:
-    # Do your deploy here
-    - exit 1
-
-deploy:development:
-  <<: *deploy_base
-  environment:
-    name: development
-  dependencies:
-    - build:development
-  only:
-    refs:
-      - master
-      - /^feature\/.*$/
-  when: manual
+    - master
