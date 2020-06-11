@@ -22,13 +22,7 @@ Django
 ```bash
 ssh piku@your_server config:set hystocks \
  SECRET_KEY=debug_key \
- ALLOWED_HOSTS=your_server.tld \
  SENTRY_DSN=debug_key \
- DATABASE_URL=postgres://hystocks:hystocks@db_host:5432/hystocks \
- REDIS_URL=redis://192.168.0.11:6379/1 \
- BROKER_URL=redis://192.168.0.11:6379/2 \
- RESULT_BACKEND_URL=redis://192.168.0.11:6379/3 \
- CELERY_RUNNING=true \
  HYPIXEL_API_KEY=debug_key
 ```
 
