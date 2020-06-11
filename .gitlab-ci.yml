@@ -17,7 +17,7 @@ build-and-deploy:
     - printf "$CI_COMMIT_REF_NAME\n$CI_COMMIT_SHORT_SHA\n" > .version.txt
     - printf "$CI_PROJECT_URL/commit/$CI_COMMIT_SHA\n" >> .version.txt
     - git add .version.txt -f
-    - git add build/static/dashboard/index.js -f
+    - git add build/static/dashboard/* -f
     - git add webpack-stats.json -f
     - git commit -m "Added dashboard statics"
     - git remote add piku $PAAS_HOST
