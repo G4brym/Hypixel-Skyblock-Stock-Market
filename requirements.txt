@@ -12,3 +12,6 @@ celery[redis]==4.4.5
 django-celery-beat==2.0.0
 requests
 redis==3.5.3
+furl
+gunicorn
+gevent
