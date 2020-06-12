@@ -31,23 +31,23 @@ if "SENTRY_DSN" in os.environ:
 # REDIS
 # --------------------------------------------------------------------------
 
-# if "REDIS_URL" in os.environ:
-#     cache_locations = [os.environ.get("REDIS_URL")]
-#     if "REDIS_URL_SLAVE" in os.environ:
-#         cache_locations.append(os.environ.get("REDIS_URL_SLAVE"))
-#     CACHES = {
-#         "default": {
-#             "BACKEND": "django_redis.cache.RedisCache",
-#             "LOCATION": cache_locations,
-#             "KEY_PREFIX": "aws-live",
-#             "OPTIONS": {
-#                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#                 "MAX_ENTRIES": 10000000,
-#             },
-#         }
-#     }
-#     SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-#     SESSION_CACHE_ALIAS = "default"
+if "REDIS_URL" in os.environ:
+    cache_locations = [os.environ.get("REDIS_URL")]
+    if "REDIS_URL_SLAVE" in os.environ:
+        cache_locations.append(os.environ.get("REDIS_URL_SLAVE"))
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": cache_locations,
+            "KEY_PREFIX": "live",
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                "MAX_ENTRIES": 10000000,
+            },
+        }
+    }
+    SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+    SESSION_CACHE_ALIAS = "default"
 
 # Celery Settings
 # ----------------------------------------------------------------------------
