@@ -14,4 +14,3 @@ requests
 redis==3.5.3
 furl
 gunicorn
-gevent
