@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # Project apps
     "hystocks.apps.core",
     "hystocks.apps.products",
+    "hystocks.apps.market",
     # 3th party apps
     "rest_framework",
     "webpack_loader",

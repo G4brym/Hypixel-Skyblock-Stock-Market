@@ -4,8 +4,6 @@ docs/_build
 hystocks/settings/local.py
 hystocks/settings/local/*
 node_modules
-.env/
-.env
 var
 db.sqlite3
 

@@ -20,7 +20,7 @@ class Product(Timestamped):
 
 
 class ProductPrice(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, db_index=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, db_index=True, related_name="prices")
 
     # Sell
     sell_price = models.DecimalField(max_digits=32, decimal_places=4)
@@ -33,3 +33,7 @@ class ProductPrice(models.Model):
     buy_orders = models.BigIntegerField()
 
     created_at = models.DateTimeField(auto_now=False, auto_now_add=False)
+
+    @property
+    def price(self):
+        return self.sell_price

@@ -1,7 +1,10 @@
 import Vue from "vue";
 import router from "./router";
 import store from "./store";
+import Highcharts from "highcharts";
 import HighchartsVue from "highcharts-vue";
+import stockInit from "highcharts/modules/stock";
+stockInit(Highcharts);
 import BootstrapVue from "bootstrap-vue";
 Vue.use(BootstrapVue);
 
