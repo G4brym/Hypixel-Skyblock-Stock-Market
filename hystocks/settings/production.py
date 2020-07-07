@@ -2,7 +2,7 @@ import dj_database_url
 
 from .base import *  # NOQA
 
-DEBUG = False
+DEBUG = True
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
 USE_X_FORWARDED_HOST = True
 
@@ -25,8 +25,9 @@ if "SENTRY_DSN" in os.environ:
     SENTRY_DSN = os.environ.get("SENTRY_DSN")
 
     from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.integrations.celery import CeleryIntegration
 
-    sentry_sdk.init(SENTRY_DSN, integrations=[DjangoIntegration()])
+    sentry_sdk.init(SENTRY_DSN, integrations=[DjangoIntegration(), CeleryIntegration()])
 
 # REDIS
 # --------------------------------------------------------------------------
@@ -52,11 +53,11 @@ if "REDIS_URL" in os.environ:
 # Celery Settings
 # ----------------------------------------------------------------------------
 
-if 'BROKER_URL' in os.environ:
-    BROKER_URL = os.environ.get('BROKER_URL')
+if 'REDIS_URL' in os.environ:
+    BROKER_URL = "{}/2".format(os.environ.get('REDIS_URL'))
 
-if 'RESULT_BACKEND_URL' in os.environ:
-    CELERY_RESULT_BACKEND = os.environ.get('RESULT_BACKEND_URL')
+if 'REDIS_URL' in os.environ:
+    CELERY_RESULT_BACKEND = "{}/3".format(os.environ.get('REDIS_URL'))
 
 if 'CELERY_RUNNING' in os.environ:
     CELERY_RUNNING = True

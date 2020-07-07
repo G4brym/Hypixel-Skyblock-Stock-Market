@@ -13,6 +13,7 @@ django-celery-beat==2.0.0
 requests
 redis==3.5.3
 django_redis==4.12.1
+whitenoise==5.1.0
 furl
 gunicorn
 uwsgi
