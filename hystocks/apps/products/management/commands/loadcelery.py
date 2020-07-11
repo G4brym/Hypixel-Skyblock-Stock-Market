@@ -14,14 +14,17 @@ class Command(BaseCommand):
         every_minute_interval, _ = IntervalSchedule.objects.get_or_create(
             every=1, period="minutes"
         )
+        every_5_minutes_interval, _ = IntervalSchedule.objects.get_or_create(
+            every=5, period="minutes"
+        )
 
         PeriodicTask.objects.exclude(name__startswith="celery").delete()
 
-        PeriodicTask.objects.get_or_create(
-            name="Half Minute Cronjob",
+        PeriodicTask.objects.update_or_create(
+            name="Crawl prices",
             defaults={
                 "task": "hystocks.apps.products.tasks.crawl_products_prices",
-                "interval": every_half_minute_interval,
+                "interval": every_5_minutes_interval,
             },
         )
 

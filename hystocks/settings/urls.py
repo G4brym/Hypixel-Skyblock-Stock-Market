@@ -4,10 +4,10 @@ from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 from hystocks.apps.core.views import VuejsView
+from hystocks.apps.market.viewsets import ProductMarketPriceViewSet
 
 router = SimpleRouter()
-# Register your api endpoints
-# router.register("name", ViewSet)
+router.register("market", ProductMarketPriceViewSet)
 
 urlpatterns = [
     # Vuejs view

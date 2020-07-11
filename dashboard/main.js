@@ -4,7 +4,9 @@ import store from "./store";
 import Highcharts from "highcharts";
 import HighchartsVue from "highcharts-vue";
 import stockInit from "highcharts/modules/stock";
+import darkUnica from "highcharts/themes/dark-unica";
 stockInit(Highcharts);
+darkUnica(Highcharts);
 import BootstrapVue from "bootstrap-vue";
 Vue.use(BootstrapVue);
 

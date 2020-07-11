@@ -33,17 +33,22 @@ class Command(BaseCommand):
             high = 0
             low = math.inf
             close = None
-            for price in product.prices.all():
+
+            total = product.prices.count()
+            for index, price in enumerate(product.prices.all()):
+                if index % 10 == 0:
+                    print("{}/{}".format(index, total))
+
                 if open_time and close_time and price.created_at > close_time:
                     clandles.append(ProductMarketPrice(
                         product=product,
-                        open_time=open_time,
+                        open_time=int(open_time.timestamp())*1000,
                         open=open,
                         high=high,
                         low=low if low != math.inf else high,
                         close=close,
                         volume=0,
-                        close_time=close_time,
+                        close_time=int(close_time.timestamp())*1000,
                     ))
 
                     open_time = None
