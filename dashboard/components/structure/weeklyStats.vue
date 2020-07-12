@@ -17,29 +17,9 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Smith Drake</td>
-                  <td>$12.546,45</td>
-                  <td>18%</td>
-                </tr>
-                <tr>
-                  <td>Vanessa Angel</td>
-                  <td>$45.656,12</td>
-                  <td>20%</td>
-                </tr>
-                <tr>
-                  <td>Bacon Francis</td>
-                  <td>$89.564,53</td>
-                  <td>12.5%</td>
-                </tr>
-                <tr>
-                  <td>Albom Mitch</td>
-                  <td>$65.456,45</td>
-                  <td>16%</td>
-                </tr>
-                <tr>
-                  <td>Fenish Paul</td>
-                  <td>$78.565,56</td>
-                  <td>6%</td>
+                  <td>Potato</td>
+                  <td>0</td>
+                  <td>0%</td>
                 </tr>
               </tbody>
             </table>
@@ -64,29 +44,9 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>Smith Drake</td>
-                  <td>$12.546,45</td>
-                  <td>18%</td>
-                </tr>
-                <tr>
-                  <td>Vanessa Angel</td>
-                  <td>$45.656,12</td>
-                  <td>20%</td>
-                </tr>
-                <tr>
-                  <td>Bacon Francis</td>
-                  <td>$89.564,53</td>
-                  <td>12.5%</td>
-                </tr>
-                <tr>
-                  <td>Albom Mitch</td>
-                  <td>$65.456,45</td>
-                  <td>16%</td>
-                </tr>
-                <tr>
-                  <td>Fenish Paul</td>
-                  <td>$78.565,56</td>
-                  <td>6%</td>
+                  <td>Potato</td>
+                  <td>0</td>
+                  <td>0%</td>
                 </tr>
               </tbody>
             </table>
