@@ -1,31 +1,21 @@
 import math
-from datetime import timedelta
 
 from django.core.management import BaseCommand
 from django.utils import timezone
 
 from hystocks.apps.market.models import ProductMarketPrice
+from hystocks.apps.market.utils import get_30_mins_split
 from hystocks.apps.products.models import Product
-
-
-def get_30_mins_split(date: timezone):
-    date = date.replace(second=0, microsecond=0)
-
-    if date.minute < 30:
-        date = date.replace(minute=0)
-    else:
-        date = date.replace(minute=30)
-
-    return date, date + timedelta(minutes=29, seconds=59)
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        clandles = []
+        now = timezone.now()
+        candles = []
 
+        ProductMarketPrice.objects.all().delete()
         for product in Product.objects.all():
             print("Processing {}".format(product.name))
-            product.market.all().delete()
 
             open_time = None
             close_time = None
@@ -40,7 +30,7 @@ class Command(BaseCommand):
                     print("{}/{}".format(index, total))
 
                 if open_time and close_time and price.created_at > close_time:
-                    clandles.append(ProductMarketPrice(
+                    candles.append(ProductMarketPrice(
                         product=product,
                         open_time=int(open_time.timestamp())*1000,
                         open=open,
@@ -62,6 +52,9 @@ class Command(BaseCommand):
                     open_time, close_time = get_30_mins_split(price.created_at)
                     open = price.price
 
+                    if close_time > now:
+                        break
+
                 if price.price > high:
                     high = price.price
                 elif price.price < low:
@@ -69,4 +62,4 @@ class Command(BaseCommand):
 
                 close = price.price
 
-        ProductMarketPrice.objects.bulk_create(clandles)
+        ProductMarketPrice.objects.bulk_create(candles)

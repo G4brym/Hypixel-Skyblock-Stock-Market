@@ -1,21 +1,25 @@
 <template>
   <div>
-    <h1>WIP</h1>
-    <template v-if="loaded">
-      <highcharts :constructorType="'stockChart'" class="hc" :options="chartOptions" ref="chart"></highcharts>
-    </template>
+    <h1 class="mb-3 text-center">Hypixel Skyblock Stock Market</h1>
+    <div class="row mb-4">
+      <div class="col-md-12 chart-holder">
+        <highcharts :constructorType="'stockChart'" class="hc" :options="chartOptions" ref="highchart" />
+      </div>
+    </div>
+    <weekly-stats />
   </div>
 </template>
 
 <script>
+// import LoadingAnimation from "@components/structure/loading";
+import WeeklyStats from "@components/structure/weeklyStats";
+
 export default {
   data() {
     return {
-      selectedProduct: 208,
-      loaded: false,
       chartOptions: {
         title: {
-          text: "AAPL stock price by minute"
+          text: "Stock price"
         },
         rangeSelector: {
           buttons: [
@@ -43,25 +47,38 @@ export default {
           selected: 1,
           inputEnabled: false
         },
-
-        series: null
+        series: [
+          {
+            type: "candlestick",
+            data: [],
+            tooltip: {
+              valueDecimals: 2
+            }
+          }
+        ]
       }
     };
   },
+  methods: {
+    loadChart: function() {
+      this.$http.get(`/market/${this.$store.state.selectedProduct}/prices/`).then(response => {
+        this.$refs.highchart.chart.setTitle({ text: `${response.data.product.name} Stock price` });
+        this.$refs.highchart.chart.series[0].name = response.data.product.name;
+        this.$refs.highchart.chart.series[0].setData(response.data.data, true);
+      });
+    }
+  },
+  watch: {
+    "$store.state.selectedProduct": function() {
+      this.loadChart();
+    }
+  },
   mounted: function() {
-    this.$http.get(`/market/${this.selectedProduct}/prices/`).then(response => {
-      this.chartOptions.series = [
-        {
-          name: "AAPL",
-          type: "candlestick",
-          data: response.data,
-          tooltip: {
-            valueDecimals: 2
-          }
-        }
-      ];
-      this.loaded = true;
-    });
+    this.loadChart();
+  },
+  components: {
+    WeeklyStats
+    // LoadingAnimation
   }
 };
 </script>

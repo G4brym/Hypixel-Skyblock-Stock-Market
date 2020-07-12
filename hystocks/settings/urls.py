@@ -5,8 +5,10 @@ from rest_framework.routers import SimpleRouter
 
 from hystocks.apps.core.views import VuejsView
 from hystocks.apps.market.viewsets import ProductMarketPriceViewSet
+from hystocks.apps.products.viewsets import ProductViewSet
 
 router = SimpleRouter()
+router.register("products", ProductViewSet)
 router.register("market", ProductMarketPriceViewSet)
 
 urlpatterns = [

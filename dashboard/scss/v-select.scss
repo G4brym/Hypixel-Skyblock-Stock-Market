@@ -1,0 +1,15 @@
+@import "~vue-select/src/scss/vue-select.scss";
+.style-chooser .vs__search::placeholder,
+.style-chooser .vs__dropdown-toggle,
+.style-chooser .vs__dropdown-menu {
+    background-color: #fff;
+    color: #444;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    border: none;
+}
+
+.style-chooser .vs__clear,
+.style-chooser .vs__open-indicator {
+    fill: #444;
+}

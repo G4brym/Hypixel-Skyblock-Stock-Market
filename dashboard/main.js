@@ -7,6 +7,8 @@ import stockInit from "highcharts/modules/stock";
 import darkUnica from "highcharts/themes/dark-unica";
 stockInit(Highcharts);
 darkUnica(Highcharts);
+import vSelect from "vue-select";
+Vue.component("v-select", vSelect);
 import BootstrapVue from "bootstrap-vue";
 Vue.use(BootstrapVue);
 
@@ -78,5 +80,8 @@ new Vue({
   store,
   components: {
     "nav-bar": NavBar
+  },
+  created: function() {
+    this.$store.dispatch("loadProducts");
   }
 }).$mount("#app");

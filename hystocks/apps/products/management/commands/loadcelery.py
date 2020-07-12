@@ -17,6 +17,9 @@ class Command(BaseCommand):
         every_5_minutes_interval, _ = IntervalSchedule.objects.get_or_create(
             every=5, period="minutes"
         )
+        every_half_hour_interval, _ = IntervalSchedule.objects.get_or_create(
+            every=30, period="minutes"
+        )
 
         PeriodicTask.objects.exclude(name__startswith="celery").delete()
 
@@ -25,6 +28,14 @@ class Command(BaseCommand):
             defaults={
                 "task": "hystocks.apps.products.tasks.crawl_products_prices",
                 "interval": every_5_minutes_interval,
+            },
+        )
+
+        PeriodicTask.objects.update_or_create(
+            name="Run Market calculation",
+            defaults={
+                "task": "hystocks.apps.market.tasks.calculate_market_data",
+                "interval": every_half_hour_interval,
             },
         )
 

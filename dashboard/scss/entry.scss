@@ -1,3 +1,37 @@
 @import "~bootswatch/dist/darkly/variables";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/darkly/bootswatch";
+@import "v-select";
+@import "loading-animation";
+
+.chart-holder {
+    min-height: 400px;
+    height: 400px;
+    position: relative;
+
+    //.loading {
+    //    position: absolute;
+    //    top: 0;
+    //    right: 0;
+    //    left: 0;
+    //    bottom: 0;
+    //    z-index: 10;
+    //    display: flex;
+    //    align-items: center;
+    //    justify-content: center;
+    //    height: 100%;
+    //    background-color: #343436;
+    //
+    //    opacity: 0;
+    //    animation: fade 1s linear;
+    //}
+}
+
+@keyframes fade {
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}
+
+.card-title {
+    margin-bottom: 0;
+}
