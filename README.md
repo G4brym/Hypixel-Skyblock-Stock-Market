@@ -13,7 +13,6 @@ These keys needs to be defined
 #####Setup env keys
 ```bash
 dokku config:set hystocks \
- DISABLE_COLLECTSTATIC=1 \
  DJANGO_SETTINGS_MODULE=hystocks.settings.production \
  ALLOWED_HOSTS=hystocks.com \
  C_FORCE_ROOT=true \
