@@ -2,7 +2,7 @@ import dj_database_url
 
 from .base import *  # NOQA
 
-DEBUG = True
+DEBUG = False
 SECRET_KEY = os.environ.get("SECRET_KEY", "")
 USE_X_FORWARDED_HOST = True
 
