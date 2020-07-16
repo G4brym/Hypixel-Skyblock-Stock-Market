@@ -16,10 +16,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Potato</td>
-                  <td>0</td>
-                  <td>0%</td>
+                <tr v-for="product in gainers" :key="product.id" @click="$store.commit('updateSelectedProduct', product.id)">
+                  <td v-text="product.name"></td>
+                  <td v-text="product.current_value"></td>
+                  <td>{{ product.change }}%</td>
                 </tr>
               </tbody>
             </table>
@@ -43,10 +43,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Potato</td>
-                  <td>0</td>
-                  <td>0%</td>
+                <tr v-for="product in losers" :key="product.id" @click="$store.commit('updateSelectedProduct', product.id)">
+                  <td v-text="product.name"></td>
+                  <td v-text="product.current_value"></td>
+                  <td>{{ product.change }}%</td>
                 </tr>
               </tbody>
             </table>
@@ -61,14 +61,27 @@
 export default {
   data() {
     return {
-      selectedProduct: null
+      gainers: [],
+      losers: []
     };
   },
   methods: {
-    selectProduct: function(value) {
-      this.$store.commit("updateSelectedProduct", value);
-      this.selectedProduct = null;
+    loadData: function() {
+      this.$http.get("/market/weekly/").then(response => {
+        this.gainers = response.data.gainers;
+        this.losers = response.data.losers;
+      });
     }
+  },
+  mounted: function() {
+    this.loadData();
   }
 };
 </script>
+
+<style scoped>
+tbody tr:hover {
+  cursor: pointer;
+  background-color: #222222;
+}
+</style>

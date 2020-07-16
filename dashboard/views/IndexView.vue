@@ -39,12 +39,17 @@ export default {
               text: "1W"
             },
             {
+              type: "month",
+              count: 1,
+              text: "1M"
+            },
+            {
               type: "all",
               count: 1,
               text: "All"
             }
           ],
-          selected: 1,
+          selected: 2,
           inputEnabled: false
         },
         series: [
