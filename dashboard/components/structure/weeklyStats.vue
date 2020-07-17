@@ -7,7 +7,7 @@
         </div>
         <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table table-borderless mb-0">
+            <table class="table table-borderless mb-0 gainers">
               <thead class="bg-light">
                 <tr>
                   <th scope="col">Stock</th>
@@ -19,7 +19,7 @@
                 <tr v-for="product in gainers" :key="product.id" @click="$store.commit('updateSelectedProduct', product.id)">
                   <td v-text="product.name"></td>
                   <td v-text="product.current_value"></td>
-                  <td>{{ product.change }}%</td>
+                  <td>+{{ product.change }}%</td>
                 </tr>
               </tbody>
             </table>
@@ -34,7 +34,7 @@
         </div>
         <div class="card-body p-0">
           <div class="table-responsive">
-            <table class="table table-borderless mb-0">
+            <table class="table table-borderless mb-0 losers">
               <thead class="bg-light">
                 <tr>
                   <th scope="col">Stock</th>
@@ -83,5 +83,13 @@ export default {
 tbody tr:hover {
   cursor: pointer;
   background-color: #222222;
+}
+
+.gainers td:nth-of-type(3) {
+  color: #81c784;
+}
+
+.losers td:nth-of-type(3) {
+  color: #e57373;
 }
 </style>

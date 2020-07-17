@@ -3,6 +3,8 @@ from decimal import Decimal
 
 from django.db.models import Count, F, Subquery, OuterRef, Case, When, Value, FloatField
 from django.utils import timezone
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -16,6 +18,7 @@ from hystocks.apps.products.serializers import ProductSerializer, ProductWeeklyS
 class ProductMarketPriceViewSet(GenericViewSet):
     queryset = ProductMarketPrice.objects.all()
 
+    @method_decorator(cache_page(60*20))
     @action(detail=True, methods=['get'])
     def prices(self, request, pk):
         return Response({
@@ -25,15 +28,7 @@ class ProductMarketPriceViewSet(GenericViewSet):
             ).order_by("open_time")
         }, status=status.HTTP_200_OK)
 
-    @action(detail=True, methods=['get'])
-    def movers(self, request, pk):
-        return Response({
-            "product": ProductSerializer(Product.objects.get(pk=pk)).data,
-            "data": ProductMarketPrice.objects.filter(product_id=pk).values_list(
-                "open_time", "open", "high", "low", "close"
-            ).order_by("open_time")
-        }, status=status.HTTP_200_OK)
-
+    @method_decorator(cache_page(60*60*6))
     @action(detail=False, methods=['get'])
     def weekly(self, request):
         last_week = int((timezone.now() - timedelta(days=7)).timestamp()) * 1000

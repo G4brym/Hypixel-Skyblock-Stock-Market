@@ -21,6 +21,9 @@ export default {
         title: {
           text: "Stock price"
         },
+        yAxis: {
+          min: 0
+        },
         rangeSelector: {
           buttons: [
             {
