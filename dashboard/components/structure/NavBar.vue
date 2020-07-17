@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link :to="{ name: 'index-view' }" class="nav-link" href="">About</router-link>
+            <router-link :to="{ name: 'about-view' }" class="nav-link" href="">About</router-link>
           </li>
         </ul>
         <form class="form-inline ml-auto my-2 my-lg-0">
@@ -40,6 +40,12 @@ export default {
     selectProduct: function(value) {
       this.$store.commit("updateSelectedProduct", value);
       this.selectedProduct = null;
+
+      if (this.$route.name !== "index-view") {
+        this.$nextTick(() => {
+          this.$router.push({ name: "index-view" });
+        });
+      }
     }
   }
 };

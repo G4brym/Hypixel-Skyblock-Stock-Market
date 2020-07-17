@@ -2,14 +2,20 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import IndexView from "@views/IndexView";
+import AboutView from "@views/AboutView";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "",
     name: "index-view",
     component: IndexView
+  },
+  {
+    path: "/about",
+    name: "about-view",
+    component: AboutView
   }
 ];
 
