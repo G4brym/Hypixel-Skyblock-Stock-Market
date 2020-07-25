@@ -8,10 +8,10 @@ var
 db.sqlite3
 
 # Media & statics
-build
+#build
 mediafiles
 staticfiles
-webpack-stats.json
+#webpack-stats.json
 
 # GeoDatabases
 geodatabases

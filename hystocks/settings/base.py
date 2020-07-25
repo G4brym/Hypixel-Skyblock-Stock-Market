@@ -172,7 +172,4 @@ CELERY_EVENT_QUEUE_EXPIRES = 60
 
 CELERY_RUNNING = False
 
-if 'BROKER_URL' in os.environ:
-    BROKER_URL = os.environ.get('BROKER_URL')
-
 HYPIXEL_API_KEY = os.environ.get('HYPIXEL_API_KEY', "")

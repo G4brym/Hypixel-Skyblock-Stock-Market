@@ -25,9 +25,14 @@ def calculate_market_data():
         close = None
 
         last_product_candle = ProductMarketPrice.objects.filter(product=product).order_by("-close_time").first()
-        last_close_time = make_aware(datetime.fromtimestamp(last_product_candle.close_time/1000))
 
-        for index, price in enumerate(product.prices.filter(created_at__gt=last_close_time)):
+        if last_product_candle:
+            last_close_time = make_aware(datetime.fromtimestamp(last_product_candle.close_time/1000))
+            qs = product.prices.filter(created_at__gt=last_close_time)
+        else:
+            qs = product.prices.filter()
+
+        for index, price in enumerate(qs):
             if open_time and close_time and price.created_at > close_time:
                 candles.append(ProductMarketPrice(
                     product=product,

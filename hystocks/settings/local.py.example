@@ -62,22 +62,6 @@ DATABASES = {
 #     }
 # }
 
-# cache_locations = [
-#     os.environ.get('REDIS_URL'),
-# ]
-#
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django_redis.cache.RedisCache",
-#         "LOCATION": 'redis://localhost:6379/3',
-#         "KEY_PREFIX": 'aws-live',
-#         "OPTIONS": {
-#             "CLIENT_CLASS": "django_redis.client.DefaultClient",
-#             'MAX_ENTRIES': 10000000
-#         }
-#     }
-# }
-# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-# SESSION_CACHE_ALIAS = "default"
-
 IS_ENV_LOCAL = True
+
+HYPIXEL_API_KEY = "test_key"
